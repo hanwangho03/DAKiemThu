@@ -40,15 +40,40 @@ namespace WebDoDienTu.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(ProductCreateViewModel viewModel)
         {
-            if (!ModelState.IsValid)
+            try
             {
+                if (viewModel.ReleaseDate < DateTime.Today)
+                {
+                    ModelState.AddModelError("ReleaseDate", "Ngày phát hành phải là ngày trong tương lai.");
+                    var categories = await _categoryService.GetCategoriesAsync();
+                    ViewBag.Categories = new SelectList(categories, "CategoryId", "CategoryName");
+                    return View(viewModel);
+                }
+
+                if (!ModelState.IsValid)
+                {
+                    if (viewModel.ReleaseDate == null)
+                    {
+                        ModelState.AddModelError("ReleaseDate", "Ngày phát hành không hợp lệ.");
+                    }
+
+                    var categories = await _categoryService.GetCategoriesAsync();
+                    ViewBag.Categories = new SelectList(categories, "CategoryId", "CategoryName");
+                    return View(viewModel);
+                }
+
+                await _productService.CreateProductAsync(viewModel);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (ArgumentException ex)
+            {
+                ModelState.AddModelError("ProductName", ex.Message);
+
                 var categories = await _categoryService.GetCategoriesAsync();
                 ViewBag.Categories = new SelectList(categories, "CategoryId", "CategoryName");
+
                 return View(viewModel);
             }
-
-            await _productService.CreateProductAsync(viewModel);
-            return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> Details(int id)

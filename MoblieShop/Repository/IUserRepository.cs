@@ -1,4 +1,5 @@
-﻿using WebDoDienTu.Models;
+﻿using Microsoft.AspNetCore.Identity;
+using WebDoDienTu.Models;
 
 namespace MoblieShop.Repository
 {
@@ -6,7 +7,7 @@ namespace MoblieShop.Repository
     {
         Task<IEnumerable<ApplicationUser>> GetAllUsersAsync();
         Task<ApplicationUser?> GetUserByIdAsync(string id);
-        Task<bool> CreateUserAsync(ApplicationUser user, string password);
+        Task<IdentityResult> CreateUserAsync(ApplicationUser user, string password);
         Task<bool> DeleteUserAsync(string id);
         Task<bool> UpdateUserAsync(ApplicationUser user);
         Task<List<string>> GetUserRolesAsync(ApplicationUser user);

@@ -45,10 +45,10 @@ namespace WebDoDienTu.Service
                 throw new ArgumentException("Tên danh mục không thể để trống.");
             }
 
-            var existingCategory = await _categoryRepository.GetByIdAsync(category.CategoryId);
+            var existingCategory = await _categoryRepository.GetByNameAsync(category.CategoryName);
             if (existingCategory != null)
             {
-                throw new InvalidOperationException("Danh mục đã tồn tại.");
+                throw new InvalidOperationException("Tên danh mục đã tồn tại.");
             }
 
             await _categoryRepository.AddAsync(category);

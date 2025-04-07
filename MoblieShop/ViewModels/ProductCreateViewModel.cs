@@ -11,7 +11,7 @@ namespace WebDoDienTu.ViewModels
         public string ProductName { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Giá không được để trống.")]
-        [Range(0.01, double.MaxValue, ErrorMessage = "Giá phải lớn hơn 0.")]
+        [Range(0.01, 1000000000000, ErrorMessage = "Giá phải lớn hơn 0 và không vượt quá 1000000000000 triệu.")]
         [DisplayName("Giá")]
         public decimal Price { get; set; } = decimal.Zero;
 
@@ -36,7 +36,7 @@ namespace WebDoDienTu.ViewModels
         [Required(ErrorMessage = "Ngày phát hành sản phẩm không được để trống.")]
         [DataType(DataType.Date, ErrorMessage = "Ngày phát hành không hợp lệ.")]
         [DisplayName("Ngày phát hành")]
-        public DateTime ReleaseDate { get; set; } = DateTime.Now;
+        public DateTime? ReleaseDate { get; set; }
 
         [Required(ErrorMessage = "Thuộc tính sản phẩm không được để trống.")]
         [DisplayName("Thuộc tính")]

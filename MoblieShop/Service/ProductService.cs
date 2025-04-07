@@ -33,6 +33,12 @@ namespace WebDoDienTu.Service
 
         public async Task CreateProductAsync(ProductCreateViewModel viewModel)
         {
+            var exitingProduct = await _productRepository.GetByNameAsync(viewModel.ProductName);
+            if (exitingProduct != null)
+            {
+                throw new ArgumentException("Tên sản phẩm đã tồn tại.");
+            }
+
             // Ánh xạ từ ViewModel sang Entity
             var product = _mapper.Map<Product>(viewModel);
 

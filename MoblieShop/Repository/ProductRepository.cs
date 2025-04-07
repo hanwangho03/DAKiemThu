@@ -47,14 +47,11 @@ namespace WebDoDienTu.Repository
             }
         }
 
-        public async Task<Product> GetByNameAsync(int id)
+        public async Task<Product> GetByNameAsync(string stringName)
         {
-            return await _context.Products.Include(x => x.Category).FirstOrDefaultAsync(x => x.ProductId == id);
-        }
+            return await _context.Products
+                .FirstOrDefaultAsync(c => c.ProductName.ToLower() == stringName.ToLower());
 
-        public async Task<IEnumerable<Product>> GetByNameAsync(string StringName)
-        {
-            return await _context.Products.Include(s => s.Category).Where(x => x.ProductName.Contains(StringName)).ToListAsync();
         }
 
         public async Task RemoveImagesAsync(List<ProductImage> images)

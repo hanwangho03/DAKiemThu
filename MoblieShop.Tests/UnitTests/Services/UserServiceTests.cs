@@ -1,4 +1,5 @@
-﻿using MoblieShop.Repository;
+﻿using Microsoft.AspNetCore.Identity;
+using MoblieShop.Repository;
 using MoblieShop.Service;
 using MoblieShop.Tests.MockData;
 using Moq;
@@ -64,7 +65,7 @@ namespace MoblieShop.Tests.UnitTests.Services
         }
 
         [Fact]
-        public async Task CreateUserAsync_ShouldReturnTrue_WhenUserCreated()
+        public async Task CreateUserAsync_ShouldReturnSuccessResult_WhenUserCreated()
         {
             // Arrange
             var model = new CreateUserViewModel
@@ -75,14 +76,19 @@ namespace MoblieShop.Tests.UnitTests.Services
                 LastName = "User"
             };
 
-            _userRepositoryMock.Setup(r => r.CreateUserAsync(It.IsAny<ApplicationUser>(), model.Password)).ReturnsAsync(true);
+            var identityResult = IdentityResult.Success;
+
+            _userRepositoryMock
+                .Setup(r => r.CreateUserAsync(It.IsAny<ApplicationUser>(), model.Password))
+                .ReturnsAsync(identityResult);
 
             // Act
             var result = await _userService.CreateUserAsync(model);
 
             // Assert
-            Assert.True(result);
+            Assert.True(result.Succeeded);
         }
+
 
         [Fact]
         public async Task DeleteUserAsync_ShouldReturnTrue_WhenUserDeleted()

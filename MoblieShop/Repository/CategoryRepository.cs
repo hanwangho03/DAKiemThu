@@ -23,6 +23,12 @@ namespace WebDoDienTu.Repository
             return await _context.Categories.FindAsync(id);
         }
 
+        public async Task<Category> GetByNameAsync(string categoryName)
+        {
+            return await _context.Categories
+                .FirstOrDefaultAsync(c => c.CategoryName.ToLower() == categoryName.ToLower());
+        }
+
         public async Task AddAsync(Category category)
         {
             _context.Categories.Add(category);

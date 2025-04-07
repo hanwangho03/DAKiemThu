@@ -28,12 +28,20 @@ namespace WebDoDienTu.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Category category)
         {
             if (ModelState.IsValid)
             {
-                await _categoryService.CreateCategoryAsync(category);
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    await _categoryService.CreateCategoryAsync(category);
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (InvalidOperationException ex)
+                {
+                    ModelState.AddModelError("CategoryName", ex.Message);
+                }
             }
             return View(category);
         }

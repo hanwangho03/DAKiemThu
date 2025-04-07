@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using MoblieShop.Repository;
 using WebDoDienTu.Models;
 using WebDoDienTu.ViewModels;
@@ -54,7 +55,7 @@ namespace MoblieShop.Service
             };
         }
 
-        public async Task<bool> CreateUserAsync(CreateUserViewModel model)
+        public async Task<IdentityResult> CreateUserAsync(CreateUserViewModel model)
         {
             var user = new ApplicationUser
             {

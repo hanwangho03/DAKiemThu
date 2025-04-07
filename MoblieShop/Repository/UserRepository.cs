@@ -26,10 +26,9 @@ namespace MoblieShop.Repository
             return await _userManager.FindByIdAsync(id);
         }
 
-        public async Task<bool> CreateUserAsync(ApplicationUser user, string password)
+        public async Task<IdentityResult> CreateUserAsync(ApplicationUser user, string password)
         {
-            var result = await _userManager.CreateAsync(user, password);
-            return result.Succeeded;
+            return await _userManager.CreateAsync(user, password);
         }
 
         public async Task<bool> DeleteUserAsync(string id)

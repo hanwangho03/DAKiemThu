@@ -35,10 +35,15 @@ namespace WebDoDienTu.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid) return View(model);
 
-            if (await _userService.CreateUserAsync(model))
+            var result = await _userService.CreateUserAsync(model);
+
+            if (result.Succeeded)
                 return RedirectToAction("Index");
 
-            ModelState.AddModelError("", "Tạo người dùng thất bại");
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
             return View(model);
         }
 
