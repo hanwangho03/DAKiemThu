@@ -1,6 +1,8 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
+using WebDriverManager;
+using WebDriverManager.DriverConfigs.Impl;
 
 namespace MoblieShop.Tests.UITests
 {
@@ -10,7 +12,16 @@ namespace MoblieShop.Tests.UITests
 
         public CreateCategoryUITests()
         {
-            _driver = new ChromeDriver();
+            // Sử dụng WebDriverManager để tự động tải ChromeDriver phù hợp
+            new DriverManager().SetUpDriver(new ChromeConfig());
+            var chromeOptions = new ChromeOptions();
+            // Chạy headless trên Jenkins nếu cần
+            if (Environment.GetEnvironmentVariable("JENKINS_HOME") != null)
+            {
+                chromeOptions.AddArgument("--headless");
+            }
+            _driver = new ChromeDriver(chromeOptions);
+            _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10); // Thêm timeout mặc định
         }
 
         private void Login()
@@ -26,31 +37,26 @@ namespace MoblieShop.Tests.UITests
             emailInput.SendKeys("admin@example.com");
             passwordInput.SendKeys("Password123!");
 
-            Thread.Sleep(1000);
-
             loginButton.Click();
 
-            Thread.Sleep(1000);
+            // Chờ điều hướng sau khi đăng nhập
+            wait.Until(driver => driver.Url.Contains("/Admin"));
         }
 
         [Fact]
         public void CreateCategory_Should_Display_SuccessMessage_When_ValidData()
         {
             Login();
-
             _driver.Navigate().GoToUrl("https://localhost:7209/Admin/Category/Create");
 
             var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
             var categoryNameInput = wait.Until(driver => driver.FindElement(By.Name("CategoryName")));
             categoryNameInput.SendKeys("Điện thoại thông minh");
 
-            Thread.Sleep(1000);
-
             var submitButton = _driver.FindElement(By.XPath("//input[@type='submit']"));
             submitButton.Click();
 
-            Thread.Sleep(1000);
-
+            wait.Until(driver => driver.Url == "https://localhost:7209/Admin/Category");
             Assert.Equal("https://localhost:7209/Admin/Category", _driver.Url);
         }
 
@@ -58,15 +64,13 @@ namespace MoblieShop.Tests.UITests
         public void CreateCategory_Should_Display_ErrorMessage_When_CategoryNameIsEmpty()
         {
             Login();
-
             _driver.Navigate().GoToUrl("https://localhost:7209/Admin/Category/Create");
 
             var submitButton = _driver.FindElement(By.XPath("//input[@type='submit']"));
             submitButton.Click();
 
-            Thread.Sleep(1000);
-
-            var errorMessage = _driver.FindElement(By.ClassName("text-danger")).Text;
+            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
+            var errorMessage = wait.Until(driver => driver.FindElement(By.ClassName("text-danger"))).Text;
             Assert.Contains("Tên danh mục là bắt buộc.", errorMessage);
         }
 
@@ -77,16 +81,14 @@ namespace MoblieShop.Tests.UITests
             _driver.Navigate().GoToUrl("https://localhost:7209/Admin/Category/Create");
 
             var categoryNameInput = _driver.FindElement(By.Name("CategoryName"));
-
             var jsExecutor = (IJavaScriptExecutor)_driver;
             jsExecutor.ExecuteScript("arguments[0].value = arguments[1];", categoryNameInput, new string('A', 51));
 
             var submitButton = _driver.FindElement(By.XPath("//input[@type='submit']"));
             submitButton.Click();
 
-            Thread.Sleep(1000);
-
-            var errorMessage = _driver.FindElement(By.ClassName("text-danger")).Text;
+            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
+            var errorMessage = wait.Until(driver => driver.FindElement(By.ClassName("text-danger"))).Text;
             Assert.Contains("Tên danh mục không được vượt quá", errorMessage);
         }
 
@@ -102,9 +104,8 @@ namespace MoblieShop.Tests.UITests
             var submitButton = _driver.FindElement(By.XPath("//input[@type='submit']"));
             submitButton.Click();
 
-            Thread.Sleep(1000);
-
-            var errorMessage = _driver.FindElement(By.ClassName("text-danger")).Text;
+            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
+            var errorMessage = wait.Until(driver => driver.FindElement(By.ClassName("text-danger"))).Text;
             Assert.Contains("Tên danh mục đã tồn tại", errorMessage);
         }
 
@@ -120,9 +121,8 @@ namespace MoblieShop.Tests.UITests
             var submitButton = _driver.FindElement(By.XPath("//input[@type='submit']"));
             submitButton.Click();
 
-            Thread.Sleep(1000);
-
-            var errorMessage = _driver.FindElement(By.ClassName("text-danger")).Text;
+            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
+            var errorMessage = wait.Until(driver => driver.FindElement(By.ClassName("text-danger"))).Text;
             Assert.Contains("Tên danh mục là bắt buộc.", errorMessage);
         }
 
@@ -138,9 +138,8 @@ namespace MoblieShop.Tests.UITests
             var submitButton = _driver.FindElement(By.XPath("//input[@type='submit']"));
             submitButton.Click();
 
-            Thread.Sleep(1000);
-
-            var errorMessage = _driver.FindElement(By.ClassName("text-danger")).Text;
+            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
+            var errorMessage = wait.Until(driver => driver.FindElement(By.ClassName("text-danger"))).Text;
             Assert.Contains("Tên danh mục không được chứa ký tự đặc biệt.", errorMessage);
         }
 
@@ -148,20 +147,17 @@ namespace MoblieShop.Tests.UITests
         public void EditCategory_Should_Display_SuccessMessage_When_ValidData()
         {
             Login();
-
             _driver.Navigate().GoToUrl("https://localhost:7209/Admin/Category/Edit/1");
 
             var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
             var categoryNameInput = wait.Until(driver => driver.FindElement(By.Name("CategoryName")));
-
             categoryNameInput.Clear();
             categoryNameInput.SendKeys("Điện thoại thông minh - Updated");
 
             var submitButton = _driver.FindElement(By.XPath("//input[@type='submit']"));
             submitButton.Click();
 
-            Thread.Sleep(1000);
-
+            wait.Until(driver => driver.Url.Contains("/Admin/Category"));
             Assert.Contains("https://localhost:7209/Admin/Category", _driver.Url);
         }
 
@@ -169,15 +165,13 @@ namespace MoblieShop.Tests.UITests
         public void SearchCategory_Should_DisplayCorrectResult_When_CategoryExists()
         {
             Login();
-
             _driver.Navigate().GoToUrl("https://localhost:7209/Admin/Category");
 
             var searchInput = _driver.FindElement(By.CssSelector("input.datatable-input"));
             searchInput.SendKeys("Điện thoại");
 
-            Thread.Sleep(5000);
-
-            var tableBody = _driver.FindElement(By.CssSelector("#datatablesSimple tbody"));
+            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
+            var tableBody = wait.Until(driver => driver.FindElement(By.CssSelector("#datatablesSimple tbody")));
             Assert.Contains("Điện thoại", tableBody.Text);
         }
 
@@ -185,21 +179,19 @@ namespace MoblieShop.Tests.UITests
         public void Pagination_Should_NavigateToSpecificPage_When_PageNumberClicked()
         {
             Login();
-
             _driver.Navigate().GoToUrl("https://localhost:7209/Admin/Category");
 
             var pageTwoButton = _driver.FindElement(By.CssSelector(".datatable-pagination-list-item a[data-page='2']"));
             pageTwoButton.Click();
 
-            Thread.Sleep(5000);
-
-            var activePage = _driver.FindElement(By.CssSelector(".datatable-pagination-list-item.datatable-active"));
+            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
+            var activePage = wait.Until(driver => driver.FindElement(By.CssSelector(".datatable-pagination-list-item.datatable-active")));
             Assert.Equal("2", activePage.Text);
         }
 
         public void Dispose()
         {
-            _driver.Quit();
+            _driver?.Quit(); // Kiểm tra null để tránh lỗi nếu driver không khởi tạo
         }
     }
 }
