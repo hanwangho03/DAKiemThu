@@ -57,7 +57,7 @@ namespace MoblieShop.Tests.UITests
             categorySelect.SelectByText("Điện thoại");
 
             var imageInput = _driver.FindElement(By.Name("ImageUrl"));
-            imageInput.SendKeys("E:\\DO AN CO SO\\MoblieShop\\MoblieShop\\wwwroot\\image\\IPhone 15_3.jpeg");
+            imageInput.SendKeys("D:\\DoAnKiemThu\\DAKiemThu\\MoblieShop\\MoblieShop\\wwwroot\\image\\IPhone 15_3.jpeg");
 
             var addAttributeBtn = _driver.FindElement(By.Id("add-attribute-btn"));
             addAttributeBtn.Click();
@@ -116,7 +116,7 @@ namespace MoblieShop.Tests.UITests
             categorySelect.SelectByText("Điện thoại");
 
             var imageInput = _driver.FindElement(By.Name("ImageUrl"));
-            imageInput.SendKeys("E:\\DO AN CO SO\\MoblieShop\\MoblieShop\\wwwroot\\image\\IPhone 15_3.jpeg");
+            imageInput.SendKeys("D:\\DoAnKiemThu\\DAKiemThu\\MoblieShop\\MoblieShop\\wwwroot\\image\\IPhone 15_3.jpeg");
 
             var createButton = _driver.FindElement(By.CssSelector("input[type='submit']"));
             createButton.Click();
@@ -151,7 +151,7 @@ namespace MoblieShop.Tests.UITests
             categorySelect.SelectByText("Điện thoại");
 
             var imageInput = _driver.FindElement(By.Name("ImageUrl"));
-            imageInput.SendKeys("E:\\DO AN CO SO\\MoblieShop\\MoblieShop\\wwwroot\\image\\IPhone 15_3.jpeg");
+            imageInput.SendKeys("D:\\DoAnKiemThu\\DAKiemThu\\MoblieShop\\MoblieShop\\wwwroot\\image\\IPhone 15_3.jpeg");
 
             var createButton = _driver.FindElement(By.CssSelector("input[type='submit']"));
             createButton.Click();
@@ -185,7 +185,7 @@ namespace MoblieShop.Tests.UITests
             categorySelect.SendKeys("");
 
             var imageInput = _driver.FindElement(By.Name("ImageUrl"));
-            imageInput.SendKeys("E:\\DO AN CO SO\\MoblieShop\\MoblieShop\\wwwroot\\image\\IPhone 15_3.jpeg");
+            imageInput.SendKeys("D:\\DoAnKiemThu\\DAKiemThu\\MoblieShop\\MoblieShop\\wwwroot\\image\\IPhone 15_3.jpeg");
 
             var createButton = _driver.FindElement(By.CssSelector("input[type='submit']"));
             createButton.Click();
@@ -219,7 +219,7 @@ namespace MoblieShop.Tests.UITests
             categorySelect.SelectByText("Điện thoại");
 
             var imageInput = _driver.FindElement(By.Name("ImageUrl"));
-            imageInput.SendKeys("E:\\DO AN CO SO\\MoblieShop\\MoblieShop\\wwwroot\\image\\IPhone 15_3.jpeg");
+            imageInput.SendKeys("D:\\DoAnKiemThu\\DAKiemThu\\MoblieShop\\MoblieShop\\wwwroot\\image\\IPhone 15_3.jpeg");
 
             var createButton = _driver.FindElement(By.CssSelector("input[type='submit']"));
             createButton.Click();
@@ -254,7 +254,7 @@ namespace MoblieShop.Tests.UITests
             categorySelect.SelectByText("Điện thoại");
 
             var imageInput = _driver.FindElement(By.Name("ImageUrl"));
-            imageInput.SendKeys("E:\\DO AN CO SO\\MoblieShop\\MoblieShop\\wwwroot\\image\\IPhone 15_3.jpeg");
+            imageInput.SendKeys("D:\\DoAnKiemThu\\DAKiemThu\\MoblieShop\\MoblieShop\\wwwroot\\image\\IPhone 15_3.jpeg");
 
             var createButton = _driver.FindElement(By.CssSelector("input[type='submit']"));
             createButton.Click();
@@ -286,7 +286,7 @@ namespace MoblieShop.Tests.UITests
             categorySelect.SelectByText("Điện thoại");
 
             var imageInput = _driver.FindElement(By.Name("ImageUrl"));
-            imageInput.SendKeys("E:\\DO AN CO SO\\MoblieShop\\MoblieShop\\wwwroot\\image\\IPhone 15_3.jpeg");
+            imageInput.SendKeys("D:\\DoAnKiemThu\\DAKiemThu\\MoblieShop\\MoblieShop\\wwwroot\\image\\IPhone 15_3.jpeg");
 
             var createButton = _driver.FindElement(By.CssSelector("input[type='submit']"));
             createButton.Click();
@@ -320,7 +320,7 @@ namespace MoblieShop.Tests.UITests
             categorySelect.SelectByText("Điện thoại");
 
             var imageInput = _driver.FindElement(By.Name("ImageUrl"));
-            imageInput.SendKeys("E:\\DO AN CO SO\\MoblieShop\\MoblieShop\\wwwroot\\image\\IPhone 15_3.jpeg");
+            imageInput.SendKeys("D:\\DoAnKiemThu\\DAKiemThu\\MoblieShop\\MoblieShop\\wwwroot\\image\\IPhone 15_3.jpeg");
 
             var createButton = _driver.FindElement(By.CssSelector("input[type='submit']"));
             createButton.Click();
@@ -354,7 +354,7 @@ namespace MoblieShop.Tests.UITests
             categorySelect.SelectByText("Điện thoại");
 
             var imageInput = _driver.FindElement(By.Name("ImageUrl"));
-            imageInput.SendKeys("E:\\DO AN CO SO\\MoblieShop\\MoblieShop\\wwwroot\\image\\IPhone 15_3.jpeg");
+            imageInput.SendKeys("D:\\DoAnKiemThu\\DAKiemThu\\MoblieShop\\MoblieShop\\wwwroot\\image\\IPhone 15_3.jpeg");
 
             var createButton = _driver.FindElement(By.CssSelector("input[type='submit']"));
             createButton.Click();
@@ -388,7 +388,7 @@ namespace MoblieShop.Tests.UITests
             categorySelect.SelectByText("Điện thoại");
 
             var imageInput = _driver.FindElement(By.Name("ImageUrl"));
-            imageInput.SendKeys("E:\\DO AN CO SO\\MoblieShop\\MoblieShop\\wwwroot\\image\\IPhone 15_3.jpeg");
+            imageInput.SendKeys("D:\\DoAnKiemThu\\DAKiemThu\\MoblieShop\\wwwroot\\image\\IPhone 15_3.jpeg");
 
             var createButton = _driver.FindElement(By.CssSelector("input[type='submit']"));
             createButton.Click();
