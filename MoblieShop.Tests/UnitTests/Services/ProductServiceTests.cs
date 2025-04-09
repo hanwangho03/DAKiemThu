@@ -88,46 +88,6 @@
 //            Assert.Null(result);
 //        }
 
-//        // ✅ 3. CreateProductAsync - Tạo sản phẩm
-//        //[Fact]
-//        //public async Task CreateProductAsync_ShouldCallRepositoryAddAsync()
-//        //{
-//        //    // Arrange
-//        //    var productViewModel = ProductMockData.GetSampleProductCreateViewModel();
-//        //    var product = new Product { ProductName = "Laptop" };
-
-//        //    _mapperMock.Setup(m => m.Map<Product>(productViewModel)).Returns(product);
-
-//        //    _cloudinaryMock.Setup(c => c.UploadAsync(It.IsAny<ImageUploadParams>()))
-//        //        .ReturnsAsync(new ImageUploadResult { SecureUrl = new System.Uri("https://fakeurl.com/image.jpg") });
-
-//        //    _cloudinaryMock.Setup(c => c.UploadLargeAsync<VideoUploadResult>(It.IsAny<VideoUploadParams>(), It.IsAny<int>(), It.IsAny<int>()))
-//        //        .ReturnsAsync(new VideoUploadResult { SecureUrl = new System.Uri("https://fakeurl.com/video.mp4") });
-
-//        //    _productRepositoryMock.Setup(repo => repo.AddAsync(It.IsAny<Product>()))
-//        //        .Returns(Task.CompletedTask);
-
-//        //    // Act
-//        //    await _productService.CreateProductAsync(productViewModel);
-
-//        //    // Assert
-//        //    _productRepositoryMock.Verify(repo => repo.AddAsync(It.IsAny<Product>()), Times.Once);
-//        //}
-
-//        //[Fact]
-//        //public async Task CreateProductAsync_ShouldThrowException_WhenUploadFails()
-//        //{
-//        //    // Arrange
-//        //    var productViewModel = ProductMockData.GetSampleProductCreateViewModel();
-
-//        //    _cloudinaryMock.Setup(c => c.UploadAsync(It.IsAny<ImageUploadParams>()))
-//        //        .ReturnsAsync(new ImageUploadResult { SecureUrl = null });
-
-//        //    // Act & Assert
-//        //    await Assert.ThrowsAsync<Exception>(() => _productService.CreateProductAsync(productViewModel));
-//        //}
-
-//        // ✅ 4. UpdateProductAsync - Cập nhật sản phẩm
 //        [Fact]
 //        public async Task UpdateProductAsync_ShouldThrowException_WhenProductDoesNotExist()
 //        {
